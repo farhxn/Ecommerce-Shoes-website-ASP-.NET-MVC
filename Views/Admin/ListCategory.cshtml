@@ -1,0 +1,194 @@
+﻿
+@{
+    ViewBag.Title = "List Category";
+    Layout = "~/Views/Shared/adminLayout.cshtml";
+}
+
+@model IEnumerable<shoes.Models.Category>
+
+<div class="container-fluid p-0">
+    <div class="row justify-content-center">
+        <div class="col-lg-12">
+            <div class="white_card card_height_100 mb_30">
+                <div class="white_card_header">
+                    <div class="box_header m-0">
+                        <div class="main-title">
+                            <h3 class="m-0">List of Category</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="white_card_body">
+                    <div class="QA_section">
+                        <div class="white_box_tittle list_header">
+                            <h4>Sliders</h4>
+                            <div class="box_right d-flex lms_block">
+
+                                <div class="add_button ms-2">
+                                    <a href="@Url.Action("addcategory","Admin")"
+                                       class="btn_1">Add New</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="QA_table mb_30">
+
+                            <table class="table" id="myTable" class="display">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr class="text-center">
+                                            <th scope="row">
+                                                <a href="#" class="question_content">
+                                                    @item.C_name
+                                                </a>
+                                            </th>
+                                            <td class="text-center"><a href="@Url.Action("editcategory", "admin", new { @id = item.C_id})" class="btn btn-sm btn-warning text-white"><i class="material-icons">create</i></a> <button onclick="dlte(@(item.C_id))" class="btn btn-sm btn-danger text-white"><i class="material-icons">delete</i></button></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+@if (TempData["Success"] != null && TempData["Success"].ToString() == "Updated Success")
+{
+    <script>
+        Swal.fire({
+            title: "Success",
+            text: "Slider Updated Successfully",
+            icon: "success"
+        });
+    </script>
+}
+
+@if (TempData["Error"] != null && TempData["Error"].ToString() == "Error")
+{
+    <script>
+        Swal.fire({
+            title: "Error",
+            text: TempData["Msg"],
+            icon: "error"
+        });
+    </script>
+}
+
+<script>
+    //function dlte(id) {
+    //    const swalWithBootstrapButtons = Swal.mixin({
+    //        // ... your Swal settings
+    //    });
+
+    //    swalWithBootstrapButtons.fire({
+    //        title: "Are you sure?",
+    //        text: "You won't be able to revert this!",
+    //        icon: "warning",
+    //        showCancelButton: true,
+    //        confirmButtonText: "Yes, delete it!",
+    //        cancelButtonText: "No, cancel!",
+    //        reverseButtons: true
+    //    }).then((result) => {
+    //        if (result.isConfirmed) {
+    //            fetch(`/Admin/deleteslider?id=${id}`, {
+    //                method: 'GET'
+    //            })
+    //                .then(response => response.json())
+    //                .then(data => {
+    //                    if (data.success) {
+    //                        swalWithBootstrapButtons.fire({
+    //                            title: "Deleted!",
+    //                            text: "Slider has been deleted.",
+    //                            icon: "success"
+    //                        });
+    //                    }
+    //                    else {
+    //                        swalWithBootstrapButtons.fire({
+    //                            title: "Error!",
+    //                            text: "Unable to delete Slider.",
+    //                            icon: "error"
+    //                        });
+    //                    }
+    //                })
+    //                .catch(error => {
+    //                    console.error('Error:', error);
+    //                });
+    //        } else if (result.dismiss === Swal.DismissReason.cancel) {
+    //            swalWithBootstrapButtons.fire({
+    //                title: "Cancelled",
+    //                text: "Your Slider is safe :)",
+    //                icon: "error"
+    //            });
+    //        }
+    //    });
+    //}
+
+
+    function dlte(id) {
+    const swalWithBootstrapButtons = Swal.mixin({
+        // ... your Swal settings
+    });
+
+    swalWithBootstrapButtons.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Make a GET request to delete the slider
+            fetch('@Url.Action("DeleteSlider", "Admin")?id=' + id)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        swalWithBootstrapButtons.fire({
+                            title: "Deleted!",
+                            text: data.message,
+                            icon: "success"
+                        });
+                        window.location.reload();
+
+                    } else {
+                        swalWithBootstrapButtons.fire({
+                            title: "Error",
+                            text: data.message,
+                            icon: "error"
+                        });
+                        window.location.reload();
+
+                    }
+                })
+                .catch(error => {
+                    swalWithBootstrapButtons.fire({
+                        title: "Success",
+                        text: "Deleted Successfully",
+                        icon: "success"
+                    });
+                    window.location.reload();
+
+                });
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            swalWithBootstrapButtons.fire({
+                title: "Cancelled",
+                text: "Your Slider is safe :)",
+                icon: "error"
+            });
+        }
+    });
+}
+
+</script>
+
