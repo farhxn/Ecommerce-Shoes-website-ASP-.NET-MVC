@@ -1,17 +1,21 @@
-﻿
+﻿@model IEnumerable<shoes.Models.Cart>
+
 @{
     ViewBag.Title = "Confirmation";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    double totalPrice = 0.0;
 }
 
 <section class="banner-area organic-breadcrumb">
     <div class="container">
         <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
             <div class="col-first">
-                <h1>Confirmation</h1>
+                <h1>Order Confirmation</h1>
                 <nav class="d-flex align-items-center">
-                    <a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
-                    <a href="category.html">Confirmation</a>
+                    <a href="@Url.Action("Index","Home")">Home<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="@Url.Action("cart","Home")">Shopping Cart<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="@Url.Action("checkout","Home")">Checkout<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="@Url.Action("confirmation","Home")">Confirmation</a>
                 </nav>
             </div>
         </div>
@@ -27,10 +31,9 @@
                 <div class="details_item">
                     <h4>Order Info</h4>
                     <ul class="list">
-                        <li><a href="#"><span>Order number</span> : 60235</a></li>
-                        <li><a href="#"><span>Date</span> : Los Angeles</a></li>
-                        <li><a href="#"><span>Total</span> : USD 2210</a></li>
-                        <li><a href="#"><span>Payment method</span> : Check payments</a></li>
+                        <li><a href="#"><span>Order number</span> : @Session["OrderID"]</a></li>
+                        <li><a href="#"><span>Date</span> : @DateTime.Now</a></li>
+                        <li><a href="#"><span>Payment method</span> : Cash On Delivery</a></li>
                     </ul>
                 </div>
             </div>
@@ -38,10 +41,9 @@
                 <div class="details_item">
                     <h4>Billing Address</h4>
                     <ul class="list">
-                        <li><a href="#"><span>Street</span> : 56/8</a></li>
-                        <li><a href="#"><span>City</span> : Los Angeles</a></li>
-                        <li><a href="#"><span>Country</span> : United States</a></li>
-                        <li><a href="#"><span>Postcode </span> : 36952</a></li>
+                        <li><a href="#"><span>Address</span> : @ViewBag.address</a></li>
+                        <li><a href="#"><span>City</span> : @ViewBag.city</a></li>
+                        <li><a href="#"><span>Postcode </span> : @ViewBag.zip</a></li>
                     </ul>
                 </div>
             </div>
@@ -49,10 +51,9 @@
                 <div class="details_item">
                     <h4>Shipping Address</h4>
                     <ul class="list">
-                        <li><a href="#"><span>Street</span> : 56/8</a></li>
-                        <li><a href="#"><span>City</span> : Los Angeles</a></li>
-                        <li><a href="#"><span>Country</span> : United States</a></li>
-                        <li><a href="#"><span>Postcode </span> : 36952</a></li>
+                        <li><a href="#"><span>Address</span> : @ViewBag.address</a></li>
+                        <li><a href="#"><span>City</span> : @ViewBag.city</a></li>
+                        <li><a href="#"><span>Postcode </span> : @ViewBag.zip</a></li>
                     </ul>
                 </div>
             </div>
@@ -62,80 +63,65 @@
             <div class="table-responsive">
                 <table class="table">
                     <thead>
-                        <tr>
+
+                       <tr>
                             <th scope="col">Product</th>
                             <th scope="col">Quantity</th>
                             <th scope="col">Total</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>
-                                <p>Pixelstore fresh Blackberry</p>
-                            </td>
-                            <td>
-                                <h5>x 02</h5>
-                            </td>
-                            <td>
-                                <p>$720.00</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p>Pixelstore fresh Blackberry</p>
-                            </td>
-                            <td>
-                                <h5>x 02</h5>
-                            </td>
-                            <td>
-                                <p>$720.00</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p>Pixelstore fresh Blackberry</p>
-                            </td>
-                            <td>
-                                <h5>x 02</h5>
-                            </td>
-                            <td>
-                                <p>$720.00</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h4>Subtotal</h4>
-                            </td>
-                            <td>
-                                <h5></h5>
-                            </td>
-                            <td>
-                                <p>$2160.00</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h4>Shipping</h4>
-                            </td>
-                            <td>
-                                <h5></h5>
-                            </td>
-                            <td>
-                                <p>Flat rate: $50.00</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h4>Total</h4>
-                            </td>
-                            <td>
-                                <h5></h5>
-                            </td>
-                            <td>
-                                <p>$2210.00</p>
-                            </td>
-                        </tr>
-                    </tbody>
+
+                        @foreach (var item in Model)
+                        {
+
+                            <tr>
+                                <td>
+                                    <p>@item.P_Name</p>
+                                </td>
+                                <td>
+                                    <h5>x @item.qty</h5>
+                                </td>
+                                <td>
+                                    <p>Rs.@item.P_Totalprice.00</p>
+                                </td>
+                            </tr>
+                            totalPrice += item.P_Totalprice;
+                        }
+                            <tr>
+                                <td>
+                                    <h4>Subtotal</h4>
+                                </td>
+                                <td>
+                                    <h5></h5>
+                                </td>
+                                <td>
+                                    <p>Rs.@totalPrice.00</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h4>Shipping</h4>
+                                </td>
+                                <td>
+                                    <h5></h5>
+                                </td>
+                                <td>
+                                    <p>Flat rate: Rs.250.00</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h4>Total</h4>
+                                </td>
+                                <td>
+                                    <h5></h5>
+                                </td>
+                                <td>
+                                    <p>Rs.@(totalPrice+250).00</p>
+                                </td>
+                            </tr>
+                        </tbody>
                 </table>
             </div>
         </div>

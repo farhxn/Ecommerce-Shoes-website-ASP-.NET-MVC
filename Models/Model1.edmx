@@ -5,12 +5,86 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="shoesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Billing">
+          <Key>
+            <PropertyRef Name="B_id" />
+          </Key>
+          <Property Name="B_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="U_id" Type="varchar" MaxLength="250" />
+          <Property Name="P_id" Type="varchar" MaxLength="250" />
+          <Property Name="P_qty" Type="varchar" MaxLength="250" />
+          <Property Name="O_status" Type="varchar" MaxLength="250" />
+          <Property Name="O_id" Type="varchar" MaxLength="250" />
+          <Property Name="B_first" Type="varchar" MaxLength="250" />
+          <Property Name="B_last" Type="varchar" MaxLength="250" />
+          <Property Name="B_number" Type="varchar" MaxLength="250" />
+          <Property Name="B_address" Type="varchar" MaxLength="500" />
+          <Property Name="B_city" Type="varchar" MaxLength="250" />
+          <Property Name="B_zip" Type="varchar" MaxLength="250" />
+          <Property Name="createdAt" Type="varchar" MaxLength="250" />
+          <Property Name="updatedAt" Type="varchar" MaxLength="250" />
+          <Property Name="isReview" Type="varchar" MaxLength="250" />
+        </EntityType>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="C_id" />
           </Key>
           <Property Name="C_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="C_name" Type="varchar" MaxLength="250" />
+          <Property Name="createdAt" Type="varchar" MaxLength="250" />
+          <Property Name="updatedAt" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="C_id" />
+          </Key>
+          <Property Name="C_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="C_name" Type="varchar" MaxLength="250" />
+          <Property Name="C_mail" Type="varchar" MaxLength="250" />
+          <Property Name="C_subject" Type="varchar" MaxLength="250" />
+          <Property Name="C_status" Type="varchar" MaxLength="250" />
+          <Property Name="createdAt" Type="varchar" MaxLength="250" />
+          <Property Name="updatedAt" Type="varchar" MaxLength="250" />
+          <Property Name="C_message" Type="varchar" MaxLength="2500" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="O_id" />
+          </Key>
+          <Property Name="O_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="U_id" Type="varchar" MaxLength="250" />
+          <Property Name="P_id" Type="varchar" MaxLength="250" />
+          <Property Name="P_qty" Type="varchar" MaxLength="250" />
+          <Property Name="createdAt" Type="varchar" MaxLength="250" />
+          <Property Name="updatedAt" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="P_id" />
+          </Key>
+          <Property Name="P_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="P_name" Type="varchar" MaxLength="250" />
+          <Property Name="P_price" Type="varchar" MaxLength="250" />
+          <Property Name="P_dprice" Type="varchar" MaxLength="250" />
+          <Property Name="P_cat" Type="varchar" MaxLength="250" />
+          <Property Name="P_img1" Type="varchar" MaxLength="250" />
+          <Property Name="P_img2" Type="varchar" MaxLength="250" />
+          <Property Name="P_img3" Type="varchar" MaxLength="250" />
+          <Property Name="P_stock" Type="varchar" MaxLength="250" />
+          <Property Name="P_desc" Type="varchar" MaxLength="250" />
+          <Property Name="createdAt" Type="varchar" MaxLength="250" />
+          <Property Name="updatedAt" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Review">
+          <Key>
+            <PropertyRef Name="R_id" />
+          </Key>
+          <Property Name="R_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="R_name" Type="varchar" MaxLength="250" />
+          <Property Name="R_mail" Type="varchar" MaxLength="250" />
+          <Property Name="R_review" Type="varchar" MaxLength="550" />
+          <Property Name="R_userId" Type="varchar" MaxLength="250" />
+          <Property Name="R_PID" Type="varchar" MaxLength="250" />
           <Property Name="createdAt" Type="varchar" MaxLength="250" />
           <Property Name="updatedAt" Type="varchar" MaxLength="250" />
         </EntityType>
@@ -26,9 +100,27 @@
           <Property Name="createdAt" Type="varchar" MaxLength="250" />
           <Property Name="updatedAt" Type="varchar" MaxLength="250" />
         </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="U_id" />
+          </Key>
+          <Property Name="U_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="U_name" Type="varchar" MaxLength="250" />
+          <Property Name="U_mail" Type="varchar" MaxLength="250" />
+          <Property Name="U_password" Type="varchar" MaxLength="250" />
+          <Property Name="U_role" Type="varchar" MaxLength="250" />
+          <Property Name="createdAt" Type="varchar" MaxLength="250" />
+          <Property Name="updatedAt" Type="varchar" MaxLength="250" />
+        </EntityType>
         <EntityContainer Name="shoesModelStoreContainer">
+          <EntitySet Name="Billing" EntityType="Self.Billing" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Review" EntityType="Self.Review" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Slider" EntityType="Self.Slider" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -58,7 +150,99 @@
         <EntityContainer Name="shoesEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="Sliders" EntityType="Self.Slider" />
+          <EntitySet Name="Products" EntityType="shoesModel.Product" />
+          <EntitySet Name="Reviews" EntityType="shoesModel.Review" />
+          <EntitySet Name="Orders" EntityType="shoesModel.Order" />
+          <EntitySet Name="Billings" EntityType="shoesModel.Billing" />
+          <EntitySet Name="Contacts" EntityType="shoesModel.Contact" />
+          <EntitySet Name="Users" EntityType="shoesModel.User" />
         </EntityContainer>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="P_id" />
+          </Key>
+          <Property Name="P_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="P_name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="P_price" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="P_dprice" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="P_cat" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="P_img1" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="P_img2" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="P_img3" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="P_stock" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="P_desc" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="createdAt" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="updatedAt" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Review">
+          <Key>
+            <PropertyRef Name="R_id" />
+          </Key>
+          <Property Name="R_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="R_name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="R_mail" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="R_review" Type="String" MaxLength="550" FixedLength="false" Unicode="false" />
+          <Property Name="R_userId" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="R_PID" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="createdAt" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="updatedAt" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="O_id" />
+          </Key>
+          <Property Name="O_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="P_id" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="P_qty" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="createdAt" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="updatedAt" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="U_id" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Billing">
+          <Key>
+            <PropertyRef Name="B_id" />
+          </Key>
+          <Property Name="B_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="U_id" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="P_id" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="P_qty" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="O_status" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="O_id" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="B_first" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="B_last" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="B_number" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="B_address" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="B_city" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="B_zip" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="createdAt" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="updatedAt" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="isReview" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="C_id" />
+          </Key>
+          <Property Name="C_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="C_name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="C_mail" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="C_subject" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="C_status" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="createdAt" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="updatedAt" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="C_message" Type="String" MaxLength="2500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="U_id" />
+          </Key>
+          <Property Name="U_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="U_name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="U_mail" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="U_password" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="U_role" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="createdAt" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="updatedAt" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -85,6 +269,98 @@
                 <ScalarProperty Name="S_status" ColumnName="S_status" />
                 <ScalarProperty Name="createdAt" ColumnName="createdAt" />
                 <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="shoesModel.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+                <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+                <ScalarProperty Name="P_desc" ColumnName="P_desc" />
+                <ScalarProperty Name="P_stock" ColumnName="P_stock" />
+                <ScalarProperty Name="P_img3" ColumnName="P_img3" />
+                <ScalarProperty Name="P_img2" ColumnName="P_img2" />
+                <ScalarProperty Name="P_img1" ColumnName="P_img1" />
+                <ScalarProperty Name="P_cat" ColumnName="P_cat" />
+                <ScalarProperty Name="P_dprice" ColumnName="P_dprice" />
+                <ScalarProperty Name="P_price" ColumnName="P_price" />
+                <ScalarProperty Name="P_name" ColumnName="P_name" />
+                <ScalarProperty Name="P_id" ColumnName="P_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reviews">
+            <EntityTypeMapping TypeName="shoesModel.Review">
+              <MappingFragment StoreEntitySet="Review">
+                <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+                <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+                <ScalarProperty Name="R_PID" ColumnName="R_PID" />
+                <ScalarProperty Name="R_userId" ColumnName="R_userId" />
+                <ScalarProperty Name="R_review" ColumnName="R_review" />
+                <ScalarProperty Name="R_mail" ColumnName="R_mail" />
+                <ScalarProperty Name="R_name" ColumnName="R_name" />
+                <ScalarProperty Name="R_id" ColumnName="R_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="shoesModel.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="U_id" ColumnName="U_id" />
+                <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+                <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+                <ScalarProperty Name="P_qty" ColumnName="P_qty" />
+                <ScalarProperty Name="P_id" ColumnName="P_id" />
+                <ScalarProperty Name="O_id" ColumnName="O_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Billings">
+            <EntityTypeMapping TypeName="shoesModel.Billing">
+              <MappingFragment StoreEntitySet="Billing">
+                <ScalarProperty Name="isReview" ColumnName="isReview" />
+                <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+                <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+                <ScalarProperty Name="B_zip" ColumnName="B_zip" />
+                <ScalarProperty Name="B_city" ColumnName="B_city" />
+                <ScalarProperty Name="B_address" ColumnName="B_address" />
+                <ScalarProperty Name="B_number" ColumnName="B_number" />
+                <ScalarProperty Name="B_last" ColumnName="B_last" />
+                <ScalarProperty Name="B_first" ColumnName="B_first" />
+                <ScalarProperty Name="O_id" ColumnName="O_id" />
+                <ScalarProperty Name="O_status" ColumnName="O_status" />
+                <ScalarProperty Name="P_qty" ColumnName="P_qty" />
+                <ScalarProperty Name="P_id" ColumnName="P_id" />
+                <ScalarProperty Name="U_id" ColumnName="U_id" />
+                <ScalarProperty Name="B_id" ColumnName="B_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contacts">
+            <EntityTypeMapping TypeName="shoesModel.Contact">
+              <MappingFragment StoreEntitySet="Contact">
+                <ScalarProperty Name="C_message" ColumnName="C_message" />
+                <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+                <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+                <ScalarProperty Name="C_status" ColumnName="C_status" />
+                <ScalarProperty Name="C_subject" ColumnName="C_subject" />
+                <ScalarProperty Name="C_mail" ColumnName="C_mail" />
+                <ScalarProperty Name="C_name" ColumnName="C_name" />
+                <ScalarProperty Name="C_id" ColumnName="C_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="shoesModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+                <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+                <ScalarProperty Name="U_role" ColumnName="U_role" />
+                <ScalarProperty Name="U_password" ColumnName="U_password" />
+                <ScalarProperty Name="U_mail" ColumnName="U_mail" />
+                <ScalarProperty Name="U_name" ColumnName="U_name" />
+                <ScalarProperty Name="U_id" ColumnName="U_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

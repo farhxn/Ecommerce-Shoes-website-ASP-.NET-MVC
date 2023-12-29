@@ -1,16 +1,17 @@
 ﻿
 @{
-    ViewBag.Title = "Contact";
+    ViewBag.Title = "Contact US";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@model shoes.Models.Contact
 <section class="banner-area organic-breadcrumb">
     <div class="container">
         <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
             <div class="col-first">
                 <h1>Contact Us</h1>
                 <nav class="d-flex align-items-center">
-                    <a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
-                    <a href="category.html">Contact</a>
+                    <a href="@Url.Action("index","Home")">Home<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="#">Contact</a>
                 </nav>
             </div>
         </div>
@@ -20,55 +21,60 @@
 
 <section class="contact_area section_gap_bottom">
     <div class="container">
-        <div id="mapBox" class="mapBox" data-lat="40.701083" data-lon="-74.1522848" data-zoom="13"
+
+        <div id="mapBox" class="mapBox" data-lat="24.860714705155004" data-lon="67.06985222209916" data-zoom="13"
              data-info="PO Box CT16122 Collins Street West, Victoria 8007, Australia." data-mlat="40.701083"
              data-mlon="-74.1522848">
         </div>
+        @if(TempData["contactMSG"] != null && TempData["contactMSG"].ToString() == "success")
+        {
+            <h3 class="text-center title_confirmation">Thank you. Your Message has been received.</h3><br />
+        }
         <div class="row">
             <div class="col-lg-3">
                 <div class="contact_info">
                     <div class="info_item">
                         <i class="lnr lnr-home"></i>
-                        <h6>California, United States</h6>
-                        <p>Santa monica bullevard</p>
+                        <h6>Karachi, Pakistan</h6>
+                        <p>Muhammad ALi Jinnah University</p>
                     </div>
                     <div class="info_item">
                         <i class="lnr lnr-phone-handset"></i>
-                        <h6><a href="#">00 (440) 9865 562</a></h6>
+                        <h6><a href="tel:+923332245310">+92 333 2245310</a></h6>
                         <p>Mon to Fri 9am to 6 pm</p>
                     </div>
                     <div class="info_item">
                         <i class="lnr lnr-envelope"></i>
                         <h6>
-                            <a href="#">
+                            <a href="mailto:farhanatif990@gmail.com">
                                 <span class="__cf_email__"
-                                      data-cfemail="6a191f1a1a05181e2a090506051806030844090507">[email&#160;protected]</span>
+                                      data-cfemail="6a191f1a1a05181e2a090506051806030844090507">farhanatif9990@gmail.com</span>
                             </a>
                         </h6>
                         <p>Send us your query anytime!</p>
                     </div>
                 </div>
             </div>
+
             <div class="col-lg-9">
-                <form class="row contact_form" action="https://preview.colorlib.com/theme/karma/contact_process.php"
-                      method="post" id="contactForm" novalidate="novalidate">
+                <form method="post" class="row contact_form">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name"
+                            <input type="text" class="form-control" required id="name" name="name" placeholder="Enter your name"
                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'">
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter email address"
+                            <input type="email" class="form-control" required id="email" name="email" placeholder="Enter email address"
                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="subject" name="subject" placeholder="Enter Subject"
+                            <input type="text" required class="form-control" required id="subject" name="subject" placeholder="Enter Subject"
                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Subject'">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <textarea class="form-control" name="message" id="message" rows="1" placeholder="Enter Message"
+                            <textarea class="form-control" required name="message" required id="message" rows="1" placeholder="Enter Message"
                                       onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Message'"></textarea>
                         </div>
                     </div>
@@ -80,3 +86,7 @@
         </div>
     </div>
 </section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+<script>
+        toastr.success("Hello");
+</script>

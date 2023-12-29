@@ -67,7 +67,7 @@
     <script>
         Swal.fire({
             title: "Success",
-            text: "Slider Updated Successfully",
+            text: "Category Updated Successfully",
             icon: "success"
         });
     </script>
@@ -85,55 +85,6 @@
 }
 
 <script>
-    //function dlte(id) {
-    //    const swalWithBootstrapButtons = Swal.mixin({
-    //        // ... your Swal settings
-    //    });
-
-    //    swalWithBootstrapButtons.fire({
-    //        title: "Are you sure?",
-    //        text: "You won't be able to revert this!",
-    //        icon: "warning",
-    //        showCancelButton: true,
-    //        confirmButtonText: "Yes, delete it!",
-    //        cancelButtonText: "No, cancel!",
-    //        reverseButtons: true
-    //    }).then((result) => {
-    //        if (result.isConfirmed) {
-    //            fetch(`/Admin/deleteslider?id=${id}`, {
-    //                method: 'GET'
-    //            })
-    //                .then(response => response.json())
-    //                .then(data => {
-    //                    if (data.success) {
-    //                        swalWithBootstrapButtons.fire({
-    //                            title: "Deleted!",
-    //                            text: "Slider has been deleted.",
-    //                            icon: "success"
-    //                        });
-    //                    }
-    //                    else {
-    //                        swalWithBootstrapButtons.fire({
-    //                            title: "Error!",
-    //                            text: "Unable to delete Slider.",
-    //                            icon: "error"
-    //                        });
-    //                    }
-    //                })
-    //                .catch(error => {
-    //                    console.error('Error:', error);
-    //                });
-    //        } else if (result.dismiss === Swal.DismissReason.cancel) {
-    //            swalWithBootstrapButtons.fire({
-    //                title: "Cancelled",
-    //                text: "Your Slider is safe :)",
-    //                icon: "error"
-    //            });
-    //        }
-    //    });
-    //}
-
-
     function dlte(id) {
     const swalWithBootstrapButtons = Swal.mixin({
         // ... your Swal settings
@@ -150,7 +101,7 @@
     }).then((result) => {
         if (result.isConfirmed) {
             // Make a GET request to delete the slider
-            fetch('@Url.Action("DeleteSlider", "Admin")?id=' + id)
+            fetch('@Url.Action("DeleteCategory", "Admin")?id=' + id)
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
@@ -183,7 +134,7 @@
         } else if (result.dismiss === Swal.DismissReason.cancel) {
             swalWithBootstrapButtons.fire({
                 title: "Cancelled",
-                text: "Your Slider is safe :)",
+                text: "Your Category is safe :)",
                 icon: "error"
             });
         }

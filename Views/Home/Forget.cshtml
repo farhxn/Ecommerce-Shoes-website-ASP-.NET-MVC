@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "Forget Password";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (TempData["orderTrack"] != null && TempData["orderTrack"].ToString() == "Failed")
+{
+    <script>
+        alert("Wrong Order ID");
+        $(document).ready(function () {
+            successToast("Order not found");
+        });
+    </script>
+}
+
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Forget Password</h1>
+                <nav class="d-flex align-items-center">
+                    <a href="@Url.Action("index","home")">Home<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="@Url.Action("login","home")">Login<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="#">Forget Password</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="tracking_box_area section_gap">
+    @if (TempData["forgetpass"] != null && TempData["forgetpass"].ToString() == "failed")
+    {
+        <h3 class="text-center title_confirmation text-success" style="color:red">Account Not Found.</h3><br />
+    }
+    <div class="container">
+        <div class="tracking_box_inner">
+            <p>
+                To change your password please enter your registered e-mail in the box below and press the "Forget Password" button. This
+                was given by you on Registration Page and on which you have receive the confirmation email.
+            </p>
+            @using (Html.BeginForm())
+            {
+
+                <form class="row tracking_form">
+                    <div class="col-md-12 form-group">
+                        <input type="text" class="form-control" id="order" name="mail" placeholder="Email ID"
+                               onfocus="this.placeholder = ''" onblur="this.placeholder = 'E-mail'">
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <button type="submit" value="submit" class="btn primary-btn">Forget Passowrd</button>
+                    </div>
+                </form>
+            }
+        </div>
+    </div>
+</section>

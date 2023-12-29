@@ -1,0 +1,137 @@
+﻿
+@{
+    ViewBag.Title = "Orders List";
+    Layout = "~/Views/Shared/adminLayout.cshtml";
+}
+
+@model IEnumerable<shoes.Models.Billing>
+
+<div class="container-fluid p-0">
+    <div class="row justify-content-center">
+        <div class="col-lg-12">
+            <div class="white_card card_height_100 mb_30">
+                <div class="white_card_header">
+                    <div class="box_header m-0">
+                        <div class="main-title">
+                            <h3 class="m-0">List of Orders</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="white_card_body">
+                    <div class="QA_section">
+                        <div class="white_box_tittle list_header">
+                            <h4>Orders</h4>
+                            <div class="box_right d-flex lms_block">
+
+                                @*<div class="add_button ms-2">
+                                        <a href="@Url.Action("addproduct","Admin")"
+                                           class="btn_1">Add New</a>
+                                    </div>*@
+                            </div>
+                        </div>
+                        <div class="QA_table mb_30">
+
+                            <table class="table" id="myTable" class="display">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th scope="col">User Name</th>
+                                        <th scope="col">Product ID</th>
+                                        <th scope="col">Order ID</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+
+                                        <tr class="text-center">
+
+                                            <th scope="row">
+                                                <a href="#" class="question_content">
+                                                    @item.B_first @item.B_last
+                                                </a>    
+                                            </th>
+                                            <td>@item.P_id</td>
+                                            <td>@item.O_id</td>
+                                            <td>@item.O_status</td>
+
+                                            <td> <button onclick='@(item.O_status == "Delivered" ? "" : $"dlte({item.B_id})")' class="btn btn-sm btn-success text-white"><i class="material-icons">beenhere</i></button></td>
+
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+
+
+    function dlte(id) {
+    const swalWithBootstrapButtons = Swal.mixin({
+        // ... your Swal settings
+    });
+
+    swalWithBootstrapButtons.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, Change Status!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Make a GET request to delete the slider
+            fetch('@Url.Action("ChangeOrderStatus", "Admin")?id=' + id)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        swalWithBootstrapButtons.fire({
+                            title: "Changed!",
+                            text: data.message,
+                            icon: "success"
+                        });
+                        window.location.reload();
+
+                    } else {
+                        swalWithBootstrapButtons.fire({
+                            title: "Error",
+                            text: data.message,
+                            icon: "error"
+                        });
+                        window.location.reload();
+
+                    }
+                })
+                .catch(error => {
+                    swalWithBootstrapButtons.fire({
+                        title: "Success",
+                        text: "Status Changed Successfully",
+                        icon: "success"
+                    });
+                    window.location.reload();
+
+                });
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            swalWithBootstrapButtons.fire({
+                title: "Cancelled",
+                text: "Your Contact Item is in pending :)",
+                icon: "error"
+            });
+        }
+    });
+}
+
+</script>
+
+
+

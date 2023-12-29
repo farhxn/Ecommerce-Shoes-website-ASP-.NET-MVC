@@ -24,7 +24,7 @@
                         @Html.HiddenFor(model => model.C_id)
                         @Html.EditorFor(model => model.createdAt, new { htmlAttributes = new { @class = "form-control", @Hidden = "hidden", @Value = DateTime.Now } })
                         @Html.EditorFor(model => model.updatedAt, new { htmlAttributes = new { @class = "form-control", @Hidden = "hidden", @Value = DateTime.Now } })
-                        @Html.EditorFor(model => model.C_id, new { htmlAttributes = new { @class = "form-control", @Hidden = "hidden", @Value = DateTime.Now } })
+                        @Html.EditorFor(model => model.C_id, new { htmlAttributes = new { @class = "form-control", @Hidden = "hidden", } })
                      
 
                         <div class="row mb-3">

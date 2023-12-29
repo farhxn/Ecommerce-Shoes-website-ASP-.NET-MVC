@@ -1,8 +1,7 @@
 
 $(document).ready(function(){
 	"use strict";
-
-	var window_width 	 = $(window).width(),
+  	var window_width 	 = $(window).width(),
 	window_height 		 = window.innerHeight,
 	header_height 		 = $(".default-header").height(),
 	header_height_static = $(".site-header.static").outerHeight(),
@@ -63,8 +62,8 @@ $(document).ready(function(){
     ==================================*/
     $(".active-product-area").owlCarousel({
         items:1,
-        autoplay:false,
-        autoplayTimeout: 5000,
+        autoplay:true,
+        autoplayTimeout: 4000,
         loop:true,
         nav:true,
         //navText:["<img src='img/product/prev.png'>","<img src='../img/product/next.png'>"],
@@ -76,7 +75,7 @@ $(document).ready(function(){
     ==================================*/
     $(".s_Product_carousel").owlCarousel({
       items:1,
-      autoplay:false,
+      autoplay:true,
       autoplayTimeout: 5000,
       loop:true,
       nav:false,
@@ -88,7 +87,7 @@ $(document).ready(function(){
     ==================================*/
     $(".active-exclusive-product-slider").owlCarousel({
         items:1,
-        autoplay:false,
+        autoplay:true,
         autoplayTimeout: 5000,
         loop:true,
         nav:true,
@@ -490,7 +489,7 @@ $(document).ready(function(){
             },
             {
               featureType: "road",
-              elementType: "labels.text.fill",
+/*              elementType: "labels.text.fill",*/
               stylers: [
                 {
                   color: "#696969"
@@ -499,7 +498,7 @@ $(document).ready(function(){
             },
             {
               featureType: "administrative",
-              elementType: "labels.text.fill",
+/*              elementType: "labels.text.fill",*/
               stylers: [
                 {
                   visibility: "on"
@@ -560,6 +559,14 @@ $(document).ready(function(){
       }
 
 
+
+
   
 
- });
+});
+
+
+
+
+
+

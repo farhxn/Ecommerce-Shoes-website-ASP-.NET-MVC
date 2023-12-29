@@ -54,7 +54,8 @@
         </div>
 
         <ul id="sidebar_menu">
-            <li class="@(TempData["active"].ToString().Equals("dashboard") ? "mn-active" : "")">
+
+            <li class="@(TempData["active"].ToString() == "dashboard" ? "mn-active" : "")">
                 <a class="has-arrow" href="#" aria-expanded="false">
                     <div class="icon_menu">
                         <img src="~/assets/admin/img/menu-icon/dashboard.svg" alt>
@@ -62,7 +63,7 @@
                     <span>Dashboard</span>
                 </a>
                 <ul>
-                    <li><a class="@(TempData["activeTab"].ToString().Equals("index") ? "active" : "")" href="@Url.Action("index", "Admin")">Home</a></li>
+                    <li><a class="@(TempData["activeTab"].ToString() == "home"  ? "active" : "")" href="@Url.Action("index", "Admin")">Home</a></li>
                 </ul>
             </li>
 
@@ -77,6 +78,72 @@
                 <ul>
                     <li><a class="@(TempData["activeTab"].ToString() == "addslider" ? "active" : "")" href="@Url.Action("addslider", "Admin")">Add Slider</a></li>
                     <li><a class="@(TempData["activeTab"].ToString() == "sliderslist" ? "active" : "")" href="@Url.Action("listslider", "Admin")">Sliders List</a></li>
+                </ul>
+            </li>
+
+            <li class="@(TempData["active"].ToString() == "product" ? "mn-active" : "")">
+                <a class="has-arrow" href="#" aria-expanded="false">
+                    <div class="icon_menu">
+                        <img src="~/assets/admin/img/menu-icon/9.svg" alt>
+                    </div>
+                    <span>Product</span>
+                </a>
+                <ul>
+                    <li><a class="@(TempData["activeTab"].ToString() == "addproduct" ? "active" : "")" href="@Url.Action("addproduct", "Admin")">Add Product</a></li>
+                    <li><a class="@(TempData["activeTab"].ToString() == "productlist" ? "active" : "")" href="@Url.Action("listproduct", "Admin")">Products List</a></li>
+                </ul>
+            </li>
+
+            <li class="@(TempData["active"].ToString() == "Category" ? "mn-active" : "")">
+                <a class="has-arrow" href="#" aria-expanded="false">
+                    <div class="icon_menu">
+                        <img src="~/assets/admin/img/menu-icon/2.svg" alt>
+                    </div>
+                    <span>Category</span>
+                </a>
+                <ul>
+                    <li><a class="@(TempData["activeTab"].ToString() == "addCategory" ? "active" : "")" href="@Url.Action("addcategory", "Admin")">Add Category</a></li>
+                    <li><a class="@(TempData["activeTab"].ToString() == "Categorylist" ? "active" : "")" href="@Url.Action("listcategory", "Admin")">Category List</a></li>
+                </ul>
+            </li>
+
+
+
+            <li class="@(TempData["active"].ToString() == "Category" ? "mn-active" : "")">
+                <a class="has-arrow" href="#" aria-expanded="false">
+                    <div class="icon_menu">
+                        <img src="~/assets/admin/img/menu-icon/2.svg" alt>
+                    </div>
+                    <span>Order</span>
+                </a>
+                <ul>
+                    <li><a class="@(TempData["activeTab"].ToString() == "olist" ? "active" : "")" href="@Url.Action("listorders", "Admin")">Order List</a></li>
+                </ul>
+            </li>
+            
+
+            <li class="@(TempData["active"].ToString() == "Category" ? "mn-active" : "")">
+                <a class="has-arrow" href="#" aria-expanded="false">
+                    <div class="icon_menu">
+                        <img src="~/assets/admin/img/menu-icon/2.svg" alt>
+                    </div>
+                    <span>Contact</span>
+                </a>
+                <ul>
+                    <li><a class="@(TempData["activeTab"].ToString() == "olist" ? "active" : "")" href="@Url.Action("ListContact", "Admin")">Contact List</a></li>
+                </ul>
+            </li>
+            
+
+            <li class="@(TempData["active"].ToString() == "Category" ? "mn-active" : "")">
+                <a class="has-arrow" href="#" aria-expanded="false">
+                    <div class="icon_menu">
+                        <img src="~/assets/admin/img/menu-icon/2.svg" alt>
+                    </div>
+                    <span>User</span>
+                </a>
+                <ul>
+                    <li><a class="@(TempData["activeTab"].ToString() == "olist" ? "active" : "")" href="@Url.Action("ListUsers", "Admin")">User List</a></li>
                 </ul>
             </li>
 
@@ -104,7 +171,7 @@
                             <span class="f_s_14 f_w_400 ml_25 white_text text_white">Apps</span>
                         </div>
                         <div class="header_right d-flex justify-content-between align-items-center">
-                            <div class="header_notification_warp d-flex align-items-center">
+                            @*<div class="header_notification_warp d-flex align-items-center">
                                 <li>
                                     <a class="bell_notification_clicker nav-link-notify" href="#">
                                         <img src="~/assets/admin/img/icon/bell.svg" alt>
@@ -184,18 +251,18 @@
                                     </div>
 
                                 </li>
-                            </div>
+                            </div>*@
                             <div class="profile_info">
                                 <img src="~/assets/admin/img/client_img.png" alt="#">
                                 <div class="profile_info_iner">
                                     <div class="profile_author_name">
                                         <p>Admin </p>
-                                        <h5>Muhammad Farhan Atif</h5>
+                                        <h5>@Session["User_Name"]</h5>
                                     </div>
                                     <div class="profile_info_details">
                                         @*<a href="#">My Profile </a>
                                             <a href="#">Settings</a>*@
-                                        <a href="#">Log Out </a>
+                                        <a href="@Url.Action("logout","home")">Log Out </a>
                                     </div>
                                 </div>
                             </div>

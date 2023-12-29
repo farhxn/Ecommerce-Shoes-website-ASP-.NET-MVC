@@ -1,20 +1,16 @@
 ﻿<!DOCTYPE html>
 <html lang="zxx" class="no-js">
 <head>
-
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <link rel="shortcut icon" href="~/assets/main/img/fav.png">
-
     <meta name="author" content="CodePixar">
-
     <meta name="description" content="">
 
     <meta name="keywords" content="">
 
     <meta charset="UTF-8">
 
-    <title> @ViewBag.Title - Maju Shop</title>
+    <title>Karma Shop | @ViewBag.Title</title>
 
     <link rel="stylesheet" href="~/assets/main/css/linearicons.css">
     <link rel="stylesheet" href="~/assets/main/css/font-awesome.min.css">
@@ -27,6 +23,8 @@
     <link rel="stylesheet" href="~/assets/main/css/ion.rangeSlider.skinFlat.css" />
     <link rel="stylesheet" href="~/assets/main/css/magnific-popup.css">
     <link rel="stylesheet" href="~/assets/main/css/main.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" />
+
     <script nonce="fa6ee4cf-ae8d-439a-882d-49b409208f39">(function (w, d) { !function (f, g, h, i) { f[h] = f[h] || {}; f[h].executed = []; f.zaraz = { deferred: [], listeners: [] }; f.zaraz.q = []; f.zaraz._f = function (j) { return function () { var k = Array.prototype.slice.call(arguments); f.zaraz.q.push({ m: j, a: k }) } }; for (const l of ["track", "set", "debug"]) f.zaraz[l] = f.zaraz._f(l); f.zaraz.init = () => { var m = g.getElementsByTagName(i)[0], n = g.createElement(i), o = g.getElementsByTagName("title")[0]; o && (f[h].t = g.getElementsByTagName("title")[0].text); f[h].x = Math.random(); f[h].w = f.screen.width; f[h].h = f.screen.height; f[h].j = f.innerHeight; f[h].e = f.innerWidth; f[h].l = f.location.href; f[h].r = g.referrer; f[h].k = f.screen.colorDepth; f[h].n = g.characterSet; f[h].o = (new Date).getTimezoneOffset(); if (f.dataLayer) for (const s of Object.entries(Object.entries(dataLayer).reduce(((t, u) => ({ ...t[1], ...u[1] }))))) zaraz.set(s[0], s[1], { scope: "page" }); f[h].q = []; for (; f.zaraz.q.length;) { const v = f.zaraz.q.shift(); f[h].q.push(v) } n.defer = !0; for (const w of [localStorage, sessionStorage]) Object.keys(w || {}).filter((y => y.startsWith("_zaraz_"))).forEach((x => { try { f[h]["z_" + x.slice(7)] = JSON.parse(w.getItem(x)) } catch { f[h]["z_" + x.slice(7)] = w.getItem(x) } })); n.referrerPolicy = "origin"; n.src = "../../cdn-cgi/zaraz/sd0d9.js?z=" + btoa(encodeURIComponent(JSON.stringify(f[h]))); m.parentNode.insertBefore(n, m) };["complete", "interactive"].includes(g.readyState) ? zaraz.init() : f.addEventListener("DOMContentLoaded", zaraz.init) }(w, d, "zarazData", "script"); })(window, document);</script>
 </head>
 <body>
@@ -36,7 +34,7 @@
             <nav class="navbar navbar-expand-lg navbar-light main_box">
                 <div class="container">
 
-                    <a class="navbar-brand logo_h" href="index.html"><img src="~/assets/main/img/logo.png" alt=""></a>
+                    <a class="navbar-brand logo_h" href="@Url.Action("index","home")"><img src="~/assets/main/img/logo.png" alt=""></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -45,40 +43,40 @@
 
                     <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                         <ul class="nav navbar-nav menu_nav ml-auto">
-                            <li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li>
-                            <li class="nav-item submenu dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Shop</a>
-                                <ul class="dropdown-menu">
-                                    <li class="nav-item"><a class="nav-link" href="category.html">Shop Category</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="single-product.html">Product Details</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="checkout.html">Product Checkout</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="cart.html">Shopping Cart</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="confirmation.html">Confirmation</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item submenu dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
-                                <ul class="dropdown-menu">
-                                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="single-blog.html">Blog Details</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item submenu dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages</a>
-                                <ul class="dropdown-menu">
-                                    <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="tracking.html">Tracking</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="elements.html">Elements</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                            <li class="nav-item active"><a class="nav-link" href="@Url.Action("index","Home")">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("shop","Home")">Shop</a></li>
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("Tracking","Home")">Track My Order</a></li>
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("contact","Home")">Contact</a></li>
+                            @if (Session["User_ID"] != null && Session["User_ID"].ToString() != "")
+                            {
+                                <li class="nav-item submenu dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                                       aria-expanded="false">Welcome,  @Session["User_Name"]</a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item"><a class="nav-link" href="@Url.Action("ChangePassword","home")">Change Passowrd</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="@Url.Action("logout", "home")">Logout</a></li>
+                                    </ul>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("login","Home")">Login</a></li>
+                            }
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-                            <li class="nav-item"><a href="#" class="cart"><span class="ti-bag"></span></a></li>
-                            <li class="nav-item">
-                                <button class="search"><span class="lnr lnr-magnifier" id="search"></span></button>
-                            </li>
-                        </ul>
+                            @if (Session["num"] != null && Session["num"].ToString() != "0")
+                            {
+                                <li class="nav-item"><a href="@Url.Action("cart", "Home")" class="cart"><span class="ti-bag"></span><span class="cart-items"> @Session["num"]</span></a></li>
+}
+else
+            {
+                                <li class="nav-item"><a href="#" class="cart"><span class="ti-bag"></span><span class="cart-items"></span></a></li>
+
+            }
+                                <li class="nav-item">
+                                    <button class="search"><span class="lnr lnr-magnifier" id="search"></span></button>
+                                </li>
+                            </ul>
                     </div>
                 </div>
             </nav>
@@ -86,7 +84,7 @@
         <div class="search_input" id="search_input_box">
             <div class="container">
                 <form class="d-flex justify-content-between">
-                    <input type="text" class="form-control" id="search_input" placeholder="Search Here">
+                    <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search Here">
                     <button type="submit" class="btn"></button>
                     <span class="lnr lnr-cross" id="close_search" title="Close Search"></span>
                 </form>
@@ -116,7 +114,7 @@
                         <h6>Newsletter</h6>
                         <p>Stay update with our latest</p>
                         <div class="" id="mc_embed_signup">
-                            <form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="form-inline">
+                            <form  novalidate="true" class="form-inline">
                                 <div class="d-flex flex-row">
                                     <input class="form-control" name="EMAIL" placeholder="Enter Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '" required="" type="email">
                                     <button class="click-btn btn btn-default"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></button>
@@ -161,7 +159,7 @@
             <div class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
                 <p class="footer-text m-0">
                     Copyright &copy;
-                    <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com/" target="_blank">Colorlib</a>
+                    <script>document.write(new Date().getFullYear());</script> All rights reserved | This is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="farhantif.netlify.app" target="_blank">M. Farhan Atif</a>
 
                 </p>
             </div>
@@ -192,6 +190,131 @@
 
         gtag('config', 'UA-23581568-13');
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+
     <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vaafb692b2aea4879b33c060e79fe94621666317369993" integrity="sha512-0ahDYl866UMhKuYcW078ScMalXqtFJggm7TmlUtp0UlD4eQk0Ixfnm5ykXKvGJNFjLMoortdseTfsRT8oCfgGA==" data-cf-beacon='{"rayId":"79116f0b4eb6de53","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2022.11.3","si":100}' crossorigin="anonymous"></script>
 </body>
 </html>
+
+
+
+<script>
+    function myFunction() {
+        var input, filter, ul, li, a, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("myUL");
+        li = ul.getElementsByClassName("col-lg-4");
+
+        for (i = 0; i < li.length; i++) {
+            a = li[i].getElementsByClassName("title")[0]; // Targeting the title anchor tag
+            txtValue = a.textContent || a.innerText;
+
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = ""; // Show the item if it matches the search
+            } else {
+                li[i].style.display = "none"; // Hide the item if it doesn't match
+            }
+        }
+    }
+        $(document).ready(function () {
+
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+
+             //$('#linkButton').click(function() {
+            //    toastr.success('Click Button');
+            //});
+        });
+
+    function successToast(msg) {
+        toastr.success(msg);
+    }
+
+    function addtocart(P_ID){
+       var qty =  document.getElementById('sst');
+        $.ajax({
+         url: "@Url.Action("addtocart", "Home")",
+        data: { id: P_ID, qty: qty.value },
+        type: "POST",
+        dataType: "json",
+
+        success: function (res) {
+        console.info(res);
+            toastr.success('Item Added to Cart!');
+            setTimeout(function () {
+                window.location.reload();
+            }, 3000);
+
+        }
+        });
+        }
+
+        function increse_pro_quantity(P_ID){
+        $.ajax({
+        url: "@Url.Action("cartincrese", "Home")",
+        data: { id : P_ID },
+        type: "POST",
+        dataType: "json",
+
+            success: function (res) {
+                toastr.success('Item Quantity Increased!');
+                setTimeout(function () {
+                    window.location.reload();
+                }, 3000);
+        }
+        });
+        }
+
+    function dcs_pro_quantity(P_ID) {
+        $.ajax({
+        url: "@Url.Action("cartdcs", "Home")",
+        data: { id : P_ID },
+        type: "POST",
+        dataType: "json",
+
+            success: function (res) {
+                toastr.success('Item Quantity Decreased!');
+                setTimeout(function () {
+                    window.location.reload();
+                }, 3000);
+        }
+
+
+        });
+        }
+
+
+   function delete_pro(P_ID) {
+    $.ajax({
+    url: "@Url.Action("deleteCartProduct", "Home")",
+    data: { id : P_ID },
+    type: "POST",
+    dataType: "json",
+
+        success: function (res) {
+            toastr.success('Item Deleted Successfully!');
+            setTimeout(function () {
+                window.location.reload();
+            }, 3000);
+    }
+
+
+    });
+    }
+
+</script>

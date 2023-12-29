@@ -1,7 +1,9 @@
-﻿
+﻿@model IEnumerable<shoes.Models.Cart>
+
 @{
-    ViewBag.Title = "Cart";
+    ViewBag.Title = "Shopping Cart";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    double totalPrice = 0.0;
 }
 
 
@@ -11,8 +13,8 @@
             <div class="col-first">
                 <h1>Shopping Cart</h1>
                 <nav class="d-flex align-items-center">
-                    <a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
-                    <a href="category.html">Cart</a>
+                    <a href="@Url.Action("index","Home")">Home<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="@Url.Action("cart","Home")">Cart</a>
                 </nav>
             </div>
         </div>
@@ -34,116 +36,70 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>
-                                <div class="media">
-                                    <div class="d-flex">
-                                        <img src="img/cart.jpg" alt="">
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="media">
+                                        <div class="d-flex">
+                                            <img src="~/assets/uploads/Products/@item.P_Pic" width="100" height="80vh" alt="">
+                                        </div>
+                                        <div class="media-body">
+                                            <p>@item.P_Name</p>
+                                        </div>
                                     </div>
-                                    <div class="media-body">
-                                        <p>Minimalistic shop for multipurpose use</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <h5>$360.00</h5>
-                            </td>
-                            <td>
-                                <div class="product_count">
-                                    <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:"
-                                           class="input-text qty">
-                                    <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+                                </td>
+                                <td>
+                                    <h5>Rs.@item.P_Price.00</h5>
+                                </td>
+                                <td>
+                                    <div class="product_count">
+                                        <input type="text" name="qty" id="sst" maxlength="@item.stock" min="1" value="@item.qty" title="Quantity:"
+                                               class="input-text qty">
+                                        <button onclick="
+                                                var result=document.getElementById('sst');
+                                                var sst=parseInt(result.value);
+                                                var stock=parseInt('@item.stock');
+                                                sst < @item.stock ? increse_pro_quantity(@item.P_ID) : ''; "
                                             class="increase items-count" type="button">
-                                        <i class="lnr lnr-chevron-up"></i>
-                                    </button>
-                                    <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
-                                            class="reduced items-count" type="button">
-                                        <i class="lnr lnr-chevron-down"></i>
-                                    </button>
-                                </div>
-                            </td>
-                            <td>
-                                <h5>$720.00</h5>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="media">
-                                    <div class="d-flex">
-                                        <img src="img/cart.jpg" alt="">
+                                            <i class="lnr lnr-chevron-up"></i>
+                                        </button>
+                                        <button onclick="
+                                                var result=document.getElementById('sst');
+                                                var sst=parseInt(result.value);
+                                                var stock=parseInt('@item.stock');
+                                                @item.qty > 1 ? dcs_pro_quantity(@item.P_ID) : '';
+                                            " class="reduced items-count" type="button">
+                                            <i class="lnr lnr-chevron-down"></i>
+                                        </button>
+
+
+
+
+
                                     </div>
-                                    <div class="media-body">
-                                        <p>Minimalistic shop for multipurpose use</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <h5>$360.00</h5>
-                            </td>
-                            <td>
-                                <div class="product_count">
-                                    <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:"
-                                           class="input-text qty">
-                                    <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-                                            class="increase items-count" type="button">
-                                        <i class="lnr lnr-chevron-up"></i>
+                                </td>
+                                <td>
+                                    <h5>Rs.@item.P_Totalprice.00</h5>
+                                </td>
+                                <td>
+
+                                    <button onclick="delete_pro(@item.P_ID)" class="reduced items-count" type="button">
+                                        <i class="lnr lnr-cross"></i>
                                     </button>
-                                    <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
-                                            class="reduced items-count" type="button">
-                                        <i class="lnr lnr-chevron-down"></i>
-                                    </button>
-                                </div>
-                            </td>
-                            <td>
-                                <h5>$720.00</h5>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="media">
-                                    <div class="d-flex">
-                                        <img src="img/cart.jpg" alt="">
-                                    </div>
-                                    <div class="media-body">
-                                        <p>Minimalistic shop for multipurpose use</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <h5>$360.00</h5>
-                            </td>
-                            <td>
-                                <div class="product_count">
-                                    <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:"
-                                           class="input-text qty">
-                                    <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-                                            class="increase items-count" type="button">
-                                        <i class="lnr lnr-chevron-up"></i>
-                                    </button>
-                                    <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
-                                            class="reduced items-count" type="button">
-                                        <i class="lnr lnr-chevron-down"></i>
-                                    </button>
-                                </div>
-                            </td>
-                            <td>
-                                <h5>$720.00</h5>
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
+                            totalPrice += item.P_Totalprice;
+                        }
                         <tr class="bottom_button">
                             <td>
-                                <a class="gray_btn" href="#">Update Cart</a>
+                                <a class="gray_btn" href="@Url.Action("cart","Home")">Update Cart</a>
                             </td>
                             <td>
                             </td>
                             <td>
                             </td>
                             <td>
-                                <div class="cupon_text d-flex align-items-center">
-                                    <input type="text" placeholder="Coupon Code">
-                                    <a class="primary-btn" href="#">Apply</a>
-                                    <a class="gray_btn" href="#">Close Coupon</a>
-                                </div>
                             </td>
                         </tr>
                         <tr>
@@ -155,41 +111,10 @@
                                 <h5>Subtotal</h5>
                             </td>
                             <td>
-                                <h5>$2160.00</h5>
+                                <h5>Rs.@totalPrice.00</h5>
                             </td>
                         </tr>
-                        <tr class="shipping_area">
-                            <td>
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-                                <h5>Shipping</h5>
-                            </td>
-                            <td>
-                                <div class="shipping_box">
-                                    <ul class="list">
-                                        <li><a href="#">Flat Rate: $5.00</a></li>
-                                        <li><a href="#">Free Shipping</a></li>
-                                        <li><a href="#">Flat Rate: $10.00</a></li>
-                                        <li class="active"><a href="#">Local Delivery: $2.00</a></li>
-                                    </ul>
-                                    <h6>Calculate Shipping <i class="fa fa-caret-down" aria-hidden="true"></i></h6>
-                                    <select class="shipping_select">
-                                        <option value="1">Bangladesh</option>
-                                        <option value="2">India</option>
-                                        <option value="4">Pakistan</option>
-                                    </select>
-                                    <select class="shipping_select">
-                                        <option value="1">Select a State</option>
-                                        <option value="2">Select a State</option>
-                                        <option value="4">Select a State</option>
-                                    </select>
-                                    <input type="text" placeholder="Postcode/Zipcode">
-                                    <a class="gray_btn" href="#">Update Details</a>
-                                </div>
-                            </td>
-                        </tr>
+
                         <tr class="out_button_area">
                             <td>
                             </td>
@@ -199,8 +124,8 @@
                             </td>
                             <td>
                                 <div class="checkout_btn_inner d-flex align-items-center">
-                                    <a class="gray_btn" href="#">Continue Shopping</a>
-                                    <a class="primary-btn" href="#">Proceed to checkout</a>
+                                    <a class="gray_btn" href="@Url.Action("shop","Home")">Continue Shopping</a>
+                                    <a class="primary-btn" href="@Url.Action("checkout","Home")">Proceed to checkout</a>
                                 </div>
                             </td>
                         </tr>

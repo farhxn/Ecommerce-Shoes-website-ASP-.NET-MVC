@@ -27,5 +27,11 @@ namespace shoes.Models
     
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Slider> Sliders { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<Review> Reviews { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<Billing> Billings { get; set; }
+        public virtual DbSet<Contact> Contacts { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

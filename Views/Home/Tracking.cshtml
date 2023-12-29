@@ -1,16 +1,29 @@
-﻿
+﻿@model IEnumerable<shoes.Models.Cart>
 @{
     ViewBag.Title = "Tracking";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    double totalPrice = 0.0;
+
 }
+
+@if (TempData["orderTrack"] != null && TempData["orderTrack"].ToString() == "Failed")
+{
+    <script>
+        alert("Wrong Order ID");
+        $(document).ready(function () {
+            successToast("Order not found");
+        });
+    </script>
+}
+
 <section class="banner-area organic-breadcrumb">
     <div class="container">
         <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
             <div class="col-first">
                 <h1>Order Tracking</h1>
                 <nav class="d-flex align-items-center">
-                    <a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
-                    <a href="category.html">Fashon Category</a>
+                    <a href="@Url.Action("index","home")">Home<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="#">Order Tracking</a>
                 </nav>
             </div>
         </div>
@@ -23,21 +36,129 @@
         <div class="tracking_box_inner">
             <p>
                 To track your order please enter your Order ID in the box below and press the "Track" button. This
-                was given to you on your receipt and in the confirmation email you should have received.
+                was given to you on Confirmation Page and in the confirmation email you should have received.
             </p>
-            <form class="row tracking_form" action="#" method="post" novalidate="novalidate">
-                <div class="col-md-12 form-group">
-                    <input type="text" class="form-control" id="order" name="order" placeholder="Order ID"
-                           onfocus="this.placeholder = ''" onblur="this.placeholder = 'Order ID'">
-                </div>
-                <div class="col-md-12 form-group">
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Billing Email Address"
-                           onfocus="this.placeholder = ''" onblur="this.placeholder = 'Billing Email Address'">
-                </div>
-                <div class="col-md-12 form-group">
-                    <button type="submit" value="submit" class="primary-btn">Track Order</button>
-                </div>
-            </form>
+            @using (Html.BeginForm())
+            {
+
+                <form class="row tracking_form">
+                    <div class="col-md-12 form-group">
+                        <input type="text" class="form-control" id="order" name="order" placeholder="Order ID"
+                               onfocus="this.placeholder = ''" onblur="this.placeholder = 'Order ID'">
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <button type="submit" value="submit" class="btn primary-btn">Track Order</button>
+                    </div>
+                </form>
+            }
         </div>
     </div>
 </section>
+
+@if (Model != null && TempData["orderTrack"].ToString() == "Success")
+{
+    <section class="order_details section_gap mb-5">
+        <div class="container">
+            <h3 class="title_confirmation">The Status of your order is  @ViewBag.status.</h3>
+            <div class="row order_d_inner">
+                <div class="col-lg-4">
+                    <div class="details_item">
+                        <h4>Order Info</h4>
+                        <ul class="list">
+                            <li><a href="#"><span>Order number</span> : @ViewBag.orderID</a></li>
+                            <li><a href="#"><span>Date</span> : @ViewBag.date</a></li>
+                            <li><a href="#"><span>Payment method</span> : Cash On Delivery</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="details_item">
+                        <h4>Billing Address</h4>
+                        <ul class="list">
+                            <li><a href="#"><span>Address</span> : @ViewBag.address</a></li>
+                            <li><a href="#"><span>City</span> : @ViewBag.city</a></li>
+                            <li><a href="#"><span>Postcode </span> : @ViewBag.zip</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="details_item">
+                        <h4>Shipping Address</h4>
+                        <ul class="list">
+                            <li><a href="#"><span>Address</span> : @ViewBag.address</a></li>
+                            <li><a href="#"><span>City</span> : @ViewBag.city</a></li>
+                            <li><a href="#"><span>Postcode </span> : @ViewBag.zip</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="order_details_table">
+                <h2>Order Details</h2>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+
+                            <tr>
+                                <th scope="col">Product</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in Model)
+                            {
+
+                                <tr>
+                                    <td>
+                                        <p>@item.P_Name</p>
+                                    </td>
+                                    <td>
+                                        <h5>x @item.qty</h5>
+                                    </td>
+                                    <td>
+                                        <p>Rs.@item.P_Totalprice.00</p>
+                                    </td>
+                                </tr>
+                                totalPrice += item.P_Totalprice;
+                            }
+                            <tr>
+                                <td>
+                                    <h4>Subtotal</h4>
+                                </td>
+                                <td>
+                                    <h5></h5>
+                                </td>
+                                <td>
+                                    <p>Rs.@totalPrice.00</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h4>Shipping</h4>
+                                </td>
+                                <td>
+                                    <h5></h5>
+                                </td>
+                                <td>
+                                    <p>Flat rate: Rs.250.00</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h4>Total</h4>
+                                </td>
+                                <td>
+                                    <h5></h5>
+                                </td>
+                                <td>
+                                    <p>Rs.@(totalPrice + 250).00</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+}
